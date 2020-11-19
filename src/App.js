@@ -5,6 +5,7 @@ import {Container} from 'semantic-ui-react';
 
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
+import Routes from './components/Routes';
 
 const client = new ApolloClient({
   uri: "http://localhost:5000/graphql",
@@ -15,9 +16,7 @@ export default class App extends Component{
   render() {
     return (
       <ApolloProvider client={client}>
-        <Container>
-          <h1>PLAYWORLD</h1>
-        </Container>
+          <Routes/>
       </ApolloProvider>
     );
   }
