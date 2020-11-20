@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Divider, Table, TableBody, TableRow, TableCell, Button, Card, Container} from 'semantic-ui-react';
+import {Button, Container, List, ListContent, Grid} from 'semantic-ui-react';
 import {getApolloContext, gql} from '@apollo/client';
 
 const GET_ALL_GAMES = gql`
@@ -38,28 +38,43 @@ export default class Games extends Component{
     inspectGame = id => this.props.history.push({pathname: '/game', state: {gameId: id}});
 
     showGames = ()=>{
-        return this.state.games.map(p =>{
+        return this.state.games.map(game =>{
             //return <div key={p.id}>{p.name}</div>;
-            return <Fragment>
-                <Divider hidden/>
-                <Table definition>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell width={2}>Nombre</TableCell>
-                            <TableCell>{p.name}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Genre</TableCell>
-                            <TableCell>{p.Genre.name}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Descripción</TableCell>
-                            <TableCell>{p.description}</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-                <Divider/>                   
-            </Fragment>
+            return <List horizontal>
+                <List.Item >
+                    <ListContent >
+                        <div class="ui link cards">
+                        <div style={{backgroundColor: 'lightyellow'}} class="card">
+                        <div class= "content">
+                                <div class="right floated meta">
+                                    <div style={{textAlign: 'center'}}><h2>{game.name}</h2></div>
+                                </div>
+                            </div>
+                            <div className="image">
+                                <img src={game.image}/>
+                            </div>
+                            <div class= "content">
+                            <div class="right floated">
+                                <i class="user outline icon"></i>
+                                Autor:
+                                <div>{game.author}</div> 
+                            </div>
+                            <i class="gamepad icon"></i>
+                            Género: 
+                            <div>{game.Genre.name}</div>
+                            </div>
+                            <div class="extra content">
+                                <span>
+                                <div style={{textAlign: 'justify'}}>
+                                {game.description}
+                                </div>
+                                </span>
+                    </div>
+                        </div>
+                </div>
+                    </ListContent>
+                </List.Item>
+            </List>
         });
 }
     render() {
@@ -76,7 +91,9 @@ export default class Games extends Component{
                         <br></br>
                 <div>
                     <Container>
+                    <Grid columns={3}>
                         {this.showGames()}
+                    </Grid>
                     </Container>
                 </div>
             </Fragment>

@@ -64,7 +64,8 @@ export default class AddGame extends Component{
 
     render() {
         return (
-            <Fragment>
+            <div  style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${"https://images-ext-1.discordapp.net/external/VjGGPcxa2rcuX0CkzFWJAhZxGo6eqJyUGzBqarDRW7c/https/www.tokioschool.com/wp-content/uploads/2020/01/plataformas-de-videojuegos-960x580.jpg"})`}}>
+             <Fragment>
                 <Button 
                 style={{backgroundColor: '#C50505'}}
                 onClick={this.enviaraHome}>
@@ -85,6 +86,14 @@ export default class AddGame extends Component{
                     </Form>
                 </Container>
             </Fragment>
+            <Container>
+            <p  style={{margin:'500px 200px', padding:'15px 15px'}}>
+
+              {/* <div style={{paddingTop:'10px', paddingLeft:'270px', paddingRight:'270px'}}><Button><h4>Comenzar</h4></Button></div> */}
+            </p>
+          </Container>
+            </div>
+            
         );
     }
 }
