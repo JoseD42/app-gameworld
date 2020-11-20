@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {getApolloContext, gql} from '@apollo/client';
-import {Table, TableBody, TableRow, TableCell, Form, Button, Divider, FormGroup, FormInput, FormSelect} from 'semantic-ui-react';
+import {Table, TableBody, TableRow, TableCell, Header, Container, Icon, Divider} from 'semantic-ui-react';
 
 const GET_GAME_BY_ID = gql`
     query($id: ID!){
@@ -17,41 +17,15 @@ const GET_GAME_BY_ID = gql`
     }
 `;
 
-const UPDATE_ONE_GAME = gql`
-    mutation($id: ID!, $name: String!, $price: Float!, $productGroupId: ID!){
-        editGenre(id: $id, name: $name, author: $author, image: $image, description: $description, genreId: $genreId){
-            id
-            name
-            author
-            image
-            description
-            Genre{
-                name
-            }
-        }
-    }
-`;
-
-const GET_ALL_GENREs = gql`
-    {
-        genres{
-            id
-            name
-        }
-    }
-`;
-
-export default class Product extends Component{
+export default class Game extends Component{
 
     state = {
         id: '',
         name: '',
-        price: 0,
-        productGroup: '',
-        productGroupList: [],
-        fieldName: '',
-        fieldPrice: '',
-        fieldGroup: ''
+        author: '',
+        image: '',
+        description: '',
+        Genre: '',
     }
 
     static contextType = getApolloContext(); 
@@ -60,50 +34,32 @@ export default class Product extends Component{
         //console.log(this.props.history.location.state.productId);
         const {client} = this.context;
         const response = await client.query({
-            query: GET_PRODUCT_BY_ID,
+            query: GET_GAME_BY_ID,
             variables: {
-                id: this.props.history.location.state.productId
+                id: this.props.history.location.state.gameId
             }
         });
-        const {id, name, price, productGroup} = response.data.product;
-        this.setState({id: id, name: name, price: price, productGroup: productGroup.name});
-
-        const response2 = await client.query({query: GET_ALL_PRODUCT_GROUPs});
-
-        this.setState({productGroupList:  response2.data.productGroups.map(item => {
-            return {key: item.id, text: item.name, value: item.id };
-        })});
+        const {id, name, author, image, description, Genre} = response.data.game;
+        this.setState({id: id, name: name, author: author, image: image, description: description, Genre: Genre.name});
           
-        //console.log(this.state.productGroupList);
+        console.log(response.data.game);
 
     }
-
-    updateProductData = ()=>{
-        const {client} = this.context;
-        const {id, fieldName, fieldPrice, fieldGroup} = this.state;
-        client.mutate({
-            mutation: UPDATE_ONE_PRODUCT,
-            variables: {
-                id: id,
-                name: fieldName,
-                price: fieldPrice,
-                productGroupId: fieldGroup
-            }
-        }).then(res => console.log(res))
-        .catch(error => console.log(error));
-        window.location.reload();
-        //console.log({id: id, name: fieldName, price: fieldPrice, productGroupId: fieldGroup});
-    }
-
-    handleName = e => this.setState({fieldName: e.target.value});
-    handlePrice = e => this.setState({fieldPrice: parseFloat(e.target.value)});
-    handleGroup = (e, {value}) => this.setState({fieldGroup: value});
 
     render() {
-        const {id, name, price, productGroup} = this.state;
+        const {id, name, author, image, description, Genre} = this.state;
         return (
             <Fragment>
-                <TitlePage label='Producto' icon='clipboard outline'/>
+                <div style={{backgroundColor: '#C50505'}}>
+                  <h1 style={{textAlign:'center', color: 'white', fontSize:'30px'}}>GameWorld</h1>
+                  </div>
+                  <br></br>
+                  <Divider horizontal>
+                    <Header as='h4'>
+                        Información:
+                    </Header>
+                </Divider>
+                <Container>
                 <Table definition>
                     <TableBody>
                         <TableRow>
@@ -111,28 +67,20 @@ export default class Product extends Component{
                             <TableCell>{name}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Precio</TableCell>
-                            <TableCell>{price}</TableCell>
+                            <TableCell>Autor</TableCell>
+                            <TableCell>{author}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Grupo</TableCell>
-                            <TableCell>{productGroup}</TableCell>
+                            <TableCell>{Genre}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Código</TableCell>
-                            <TableCell>{id}</TableCell>
+                            <TableCell>Descripción</TableCell>
+                            <TableCell>{description}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
-                <Divider hidden/>
-                <Form>
-                    <FormGroup widths='equal'>
-                        <FormInput label='Nombre producto' placeholder='Nombre producto' onChange={this.handleName}/>
-                        <FormInput type='number' label='Precio' placeholder='Precio' onChange={this.handlePrice}/>
-                        <FormSelect options={this.state.productGroupList} label='Grupo' placeholder='Grupo' onChange={this.handleGroup}/>
-                    </FormGroup>
-                    <Button content='Confirmar' onClick={this.updateProductData}/>
-                </Form>
+                </Container>
             </Fragment>
         );
     }

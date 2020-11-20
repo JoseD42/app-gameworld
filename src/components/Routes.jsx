@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import AddGame from './AddGame';
 import Games from './Games';
+import Game from './Game';
 
 //import ProductList from './ProductList';
 
@@ -13,6 +14,7 @@ export default class Routes extends Component{
         return (
             <BrowserRouter>
                 <Switch>
+                    <Route path='/game' component={Game}/>
                     <Route path='/games' component={Games}/>
                     <Route path='/addgame' component={AddGame}/>
                     <Route path='/' component={Home}/>

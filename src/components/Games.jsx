@@ -42,7 +42,7 @@ export default class Games extends Component{
             //return <div key={p.id}>{p.name}</div>;
             return <List horizontal>
                 <List.Item >
-                    <ListContent >
+                    <ListContent onClick={() => this.inspectGame(game.id)}>
                         <div class="ui link cards">
                         <div style={{backgroundColor: 'lightyellow'}} class="card">
                         <div class= "content">
