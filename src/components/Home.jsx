@@ -35,46 +35,49 @@ export default class MenuExampleBasic extends Component {
       return(
         <header style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${"https://cdn-3.expansion.mx/dims4/default/a8d9bb5/2147483647/strip/true/crop/724x483+0+0/resize/1800x1201!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F94%2F91%2Ffd67f78e4362965da5403223727c%2Fvideojuegos-emprendedores-gamers.jpg"})`}}>
          <Fragment>
-            <div style={{backgroundColor: '#C50505'}}>
-                  <h1 style={{textAlign:'center', color: 'white', fontSize:'30px'}}>GameWorld</h1>
+            <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
+                  <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>
           <Menu widths= "9">
             <Menu.Item
-              name='juegos'
+              name='Juegos'
               active={activeItem === 'juegos'}
-              onClick={this.enviaraGames}><h5>Juegos</h5></Menu.Item>
+              onClick={this.enviaraGames}><h5 style={{fontSize:'17px'}}>Juegos</h5></Menu.Item>
     
             <Menu.Item
-              name='descargar'
+              name='Descargar'
               active={activeItem === 'descargar'}
-              onClick={this.handleItemClick}><h5>Descargar</h5></Menu.Item>
+              onClick={this.handleItemClick}><h5 style={{fontSize:'17px'}}>Descargar</h5></Menu.Item>
     
             <Menu.Item
-              name='subir juego'
+              name='Subir juego'
               active={activeItem === 'subir juego'}
-              onClick={this.enviaraAddGame}><h5>Subir Juego</h5></Menu.Item>
+              onClick={this.enviaraAddGame}><h5 style={{fontSize:'17px'}}>Subir Juego</h5></Menu.Item>
           </Menu>
             </div>
         </Fragment>
         <div>
-        <div style={{margin:'300px 300px', border:'3px solid white', textAlign:'center', backgroundColor:'black'}}>
+        <div style={{margin:'300px 300px', border:'3px solid white', textAlign:'center'}}>
           <Container>
-            <p style={{color:'white', font: 'bold', fontSize:'17px'}}>
-              <h1>¿QUIERES DAR A CONOCER TU PROPIO VIDEOJUEGO?</h1>
+            <p style={{color:'white', font: 'bold', fontSize:'17px', margin:'15px 0px'}}>
+              <h1 style={{margin:'10px'}}>¿QUIERES DAR A CONOCER TU PROPIO VIDEOJUEGO?</h1>
               GameWorld es una plataforma web que te brinda la posibildad de subir todos aquellos videojuegos creados por ti para darlos a conocer en esta plataforma.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere nobis vel unde deleniti repellendus earum neque iure ad consequatur incidunt perspiciatis aspernatur, ea quaerat mollitia! Unde dolore soluta aut minus.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde voluptas obcaecati deleniti tenetur asperiores doloribus, officiis fuga. Obcaecati totam dolorem enim facere culpa quos vero, sit aut reprehenderit consectetur repellat.
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore nulla quos iste obcaecati ipsum aspernatur. Exercitationem, fugiat sunt. Blanditiis asperiores sit provident laudantium corrupti, totam numquam dolor non autem aliquid.
+              Es un espacio diseñado para que todos aquellos alumnos de la Universidad La Salle puedan tanto publicar sus videojuegos como descargar todos aquellos que ya se hayan subido.
+              Con tan solo acceder al apartado de "Subir juegos" y registrar los datos de tu proyecto podras publicarlo sin necesidad de crear una cuenta.
+              Si deseas descargar algun proyecto de la comunidad puedes ir al apartado de "Descargar" y allí encontraras todos los juegos publicados hasta el momento.
+              En caso de que tengas alguna duda puedes contactarnos desde: ... ... ...
+              Creditos:
+              Jose Daniel Becerra Esquer, César Alejandro Escobedo Cota, Jorge Abrecht Perez Paniagua, Daney Arvayo Castro.
             </p>
           </Container>
         </div>
         <Container>
-            <p  style={{margin:'400px 200px', padding:'15px 15px'}}>
+            <p>
 
               {/* <div style={{paddingTop:'10px', paddingLeft:'270px', paddingRight:'270px'}}><Button><h4>Comenzar</h4></Button></div> */}
             </p>
           </Container>
         </div>
-        
+        <footer style={{textAlign:'center', color:'white'}}>Derechos reservados 2020</footer>
         </header>
         
       )

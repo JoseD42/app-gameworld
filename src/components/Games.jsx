@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Container, List, ListContent, Grid} from 'semantic-ui-react';
+import {Button, Container, List, ListContent, Grid, Menu} from 'semantic-ui-react';
 import {getApolloContext, gql} from '@apollo/client';
 
 const GET_ALL_GAMES = gql`
@@ -18,6 +18,11 @@ const GET_ALL_GAMES = gql`
 `;
 
 export default class Games extends Component{
+    state = {}
+  
+handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
 
     enviaraHome = () => this.props.history.push({ pathname: '/' });
 
@@ -46,30 +51,23 @@ export default class Games extends Component{
                         <div class="ui link cards">
                         <div style={{backgroundColor: 'lightyellow'}} class="card">
                         <div class= "content">
-                                <div class="right floated meta">
-                                    <div style={{textAlign: 'center'}}><h2>{game.name}</h2></div>
-                                </div>
+                            <div class="header">
+                                {game.name}
                             </div>
+                        </div>
                             <div className="image">
                                 <img src={game.image}/>
                             </div>
                             <div class= "content">
-                            <div class="right floated">
-                                <i class="user outline icon"></i>
-                                Autor:
-                                <div>{game.author}</div> 
-                            </div>
-                            <i class="gamepad icon"></i>
-                            Género: 
-                            <div>{game.Genre.name}</div>
-                            </div>
-                            <div class="extra content">
-                                <span>
-                                <div style={{textAlign: 'justify'}}>
-                                {game.description}
+                                <div class="right floated">
+                                    <i class="user outline icon"></i>
+                                    Autor:
+                                    <div>{game.author}</div> 
                                 </div>
-                                </span>
-                    </div>
+                                <i class="gamepad icon"></i>
+                                Género: 
+                                <div>{game.Genre.name}</div>
+                            </div>
                         </div>
                 </div>
                     </ListContent>
@@ -77,25 +75,46 @@ export default class Games extends Component{
             </List>
         });
 }
+
     render() {
+        
+        const { activeItem } = this.state
         return (
             <div style={{ backgroundColor: 'lightgrey'}}>
                 <Fragment>
-                <Button 
-                style={{backgroundColor: '#C50505'}}
-                onClick={this.enviaraHome}>
-                        <h1 style={{margin:'0px 840px', textAlign:'center', color: 'white'}}>GameWorld</h1>
-                </Button>
+                <Fragment>
+                    <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
+
+                    <div >
+                    <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
+                     <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}>GameWorld</h1>   
+                    </a>
+                        </div>
+                    
+          <Menu widths= "9">
+            <Menu.Item
+              name='Descargar'
+              active={activeItem === 'descargar'}
+              onClick={this.handleItemClick}><h5 style={{fontSize:'17px'}}>Descargar</h5></Menu.Item>
+    
+            <Menu.Item
+              name='Subir juego'
+              active={activeItem === 'subir juego'}
+              onClick={this.enviaraAddGame}><h5 style={{fontSize:'17px'}}>Subir Juego</h5></Menu.Item>
+          </Menu>
+            </div>
+        </Fragment>
+        <div class="ui grid">
+            
+        </div>
                         <br></br>
                         <br></br>
                         <br></br>
-                <div>
-                    <Container>
-                    <Grid columns={3}>
+                <Container>
+                    <div class="ui grid"> 
                         {this.showGames()}
-                    </Grid>
-                    </Container>
-                </div>
+                    </div>
+                </Container>
             </Fragment>
             </div>
         );
