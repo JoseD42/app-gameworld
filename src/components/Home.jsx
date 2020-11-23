@@ -25,6 +25,7 @@ export default class MenuExampleBasic extends Component {
 
     enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
     enviaraGames = () => this.props.history.push({ pathname: '/games' });
+    enviaraGenres = () => this.props.history.push({ pathname: '/genres' });
   
     render() {
       const { activeItem } = this.state
@@ -36,7 +37,10 @@ export default class MenuExampleBasic extends Component {
         <header style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${"https://cdn-3.expansion.mx/dims4/default/a8d9bb5/2147483647/strip/true/crop/724x483+0+0/resize/1800x1201!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F94%2F91%2Ffd67f78e4362965da5403223727c%2Fvideojuegos-emprendedores-gamers.jpg"})`}}>
          <Fragment>
             <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-                  <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>
+              
+              
+                  <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{width:'150px', height:'150px', float:'left', padding:'0px 80px'}}/>GameWorld</h1>
+                  
           <Menu widths= "9">
             <Menu.Item
               name='Juegos'
@@ -44,9 +48,9 @@ export default class MenuExampleBasic extends Component {
               onClick={this.enviaraGames}><h5 style={{fontSize:'17px'}}>Juegos</h5></Menu.Item>
     
             <Menu.Item
-              name='Descargar'
-              active={activeItem === 'descargar'}
-              onClick={this.handleItemClick}><h5 style={{fontSize:'17px'}}>Descargar</h5></Menu.Item>
+              name='Explorar Géneros'
+              active={activeItem === 'Explorar Géneros'}
+              onClick={this.enviaraGenres}><h5 style={{fontSize:'17px'}}>Explorar por Género</h5></Menu.Item>
     
             <Menu.Item
               name='Subir juego'

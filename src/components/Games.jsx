@@ -18,17 +18,16 @@ const GET_ALL_GAMES = gql`
 `;
 
 export default class Games extends Component{
-    state = {}
-  
-handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
+    enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
+
+    enviaraGenres = () => this.props.history.push({ pathname: '/genres' });
 
     enviaraHome = () => this.props.history.push({ pathname: '/' });
 
     state = {
         games: [],
-        isLoading: true
+        gamesOptions: [],
     }
 
     static contextType = getApolloContext(); 
@@ -36,18 +35,16 @@ enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
     componentDidMount = async ()=>{
         const {client} = this.context;
         const response = await client.query({query: GET_ALL_GAMES});
-        this.setState({games: response.data.games, isLoading: response.loading});
-        console.log(response.loading);
+        this.setState({games: response.data.games});
     }
 
     inspectGame = id => this.props.history.push({pathname: '/game', state: {gameId: id}});
 
     showGames = ()=>{
         return this.state.games.map(game =>{
-            //return <div key={p.id}>{p.name}</div>;
             return <List horizontal>
-                <List.Item >
-                    <ListContent onClick={() => this.inspectGame(game.id)}>
+                <List.Item style={{padding:'60px 10px'}}>
+                    <ListContent style={{height:'200px'}} onClick={() => this.inspectGame(game.id)}>
                         <div class="ui link cards">
                         <div style={{backgroundColor: 'lightyellow'}} class="card">
                         <div class= "content">
@@ -56,7 +53,7 @@ enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
                             </div>
                         </div>
                             <div className="image">
-                                <img src={game.image}/>
+                                <img style={{height:'180px'}} src={game.image}/>
                             </div>
                             <div class= "content">
                                 <div class="right floated">
@@ -87,15 +84,15 @@ enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
 
                     <div >
                     <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
-                     <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}>GameWorld</h1>   
+                     <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
                     </a>
                         </div>
                     
           <Menu widths= "9">
             <Menu.Item
-              name='Descargar'
-              active={activeItem === 'descargar'}
-              onClick={this.handleItemClick}><h5 style={{fontSize:'17px'}}>Descargar</h5></Menu.Item>
+              name='Explorar Géneros'
+              active={activeItem === 'Explorar Géneros'}
+              onClick={this.enviaraGenres}><h5 style={{fontSize:'17px'}}>Explorar por Género</h5></Menu.Item>
     
             <Menu.Item
               name='Subir juego'
@@ -104,12 +101,7 @@ enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
           </Menu>
             </div>
         </Fragment>
-        <div class="ui grid">
-            
-        </div>
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                        <br></br>    
                 <Container>
                     <div class="ui grid"> 
                         {this.showGames()}

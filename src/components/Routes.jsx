@@ -4,6 +4,7 @@ import Home from './Home';
 import AddGame from './AddGame';
 import Games from './Games';
 import Game from './Game';
+import Genres from './Genres';
 
 //import ProductList from './ProductList';
 
@@ -17,6 +18,7 @@ export default class Routes extends Component{
                     <Route path='/game' component={Game}/>
                     <Route path='/games' component={Games}/>
                     <Route path='/addgame' component={AddGame}/>
+                    <Route path='/genres' component={Genres}/>
                     <Route path='/' component={Home}/>
                 </Switch>
             </BrowserRouter>

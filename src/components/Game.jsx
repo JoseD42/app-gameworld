@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {getApolloContext, gql} from '@apollo/client';
-import {Table, TableBody, TableRow, TableCell, Header, Container, Icon, Divider, Image, Menu, Button} from 'semantic-ui-react';
+import {Table, TableBody, TableRow, TableCell, Header, Container, Divider, Image, Menu, Button} from 'semantic-ui-react';
 
 const GET_GAME_BY_ID = gql`
     query($id: ID!){
@@ -31,7 +31,6 @@ export default class Game extends Component{
     static contextType = getApolloContext(); 
 
     componentDidMount = async ()=>{
-        //console.log(this.props.history.location.state.productId);
         const {client} = this.context;
         const response = await client.query({
             query: GET_GAME_BY_ID,
@@ -53,9 +52,9 @@ export default class Game extends Component{
     enviaraGames = () => this.props.history.push({ pathname: '/games' });
     render() {
         const { activeItem } = this.state
-        const {id, name, author, image, description, Genre} = this.state;
+        const {name, author, description, Genre} = this.state;
         return (
-            <header style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${"https://ak.picdn.net/shutterstock/videos/1035635633/thumb/12.jpg?ip=x480"})`}}>
+            <header style={{flex:'1', position:'absolute', minHeight:'100%', minWidth:'1024px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', width:'100%', height:'auto', backgroundImage: `url(${"https://ak.picdn.net/shutterstock/videos/1035635633/thumb/12.jpg?ip=x480"})`}}>
             <Fragment>
                 <Fragment>
                     <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
@@ -97,29 +96,33 @@ export default class Game extends Component{
                         <TableRow>
                             <TableCell><Image centered src={this.state.image} style={{width:'400px'}} />
                             <TableRow>
-                            <TableCell width={2}>Nombre</TableCell>
+                            <TableCell width={2}><h3>Nombre</h3></TableCell>
                             <TableCell>{name}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Autor</TableCell>
+                            <TableCell><h3>Autor</h3></TableCell>
                             <TableCell>{author}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Género</TableCell>
+                            <TableCell><h3>Género</h3></TableCell>
                             <TableCell>{Genre}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell>Descripción</TableCell>
+                            <TableCell><h3>Descripción</h3></TableCell>
                             <TableCell>{description}</TableCell>
                         </TableRow>
                             </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
+                <div style={{padding:'0px 946px'}}>
+                 <Button size='massive' color='teal'>Descargar</Button>   
+                </div>
+                
                 </Container>
             </Fragment>
             <Container>
-            <p style={{margin:'528px 0px'}}>
+            <p style={{margin:'200px 0px'}}>
 
               {/* <div style={{paddingTop:'10px', paddingLeft:'270px', paddingRight:'270px'}}><Button><h4>Comenzar</h4></Button></div> */}
             </p>

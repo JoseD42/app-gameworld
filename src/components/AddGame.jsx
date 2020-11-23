@@ -2,6 +2,7 @@ import React, {Component, Fragment} from "react";
 import {getApolloContext, gql} from '@apollo/client';
 import {Form, Button, FormGroup, FormInput, FormSelect, Menu, Container} from 'semantic-ui-react';
 
+
 const ADD_GAME = gql`
     mutation($name: String!, $author: String!, $image: String!, $description: String!, $genreId: ID!){
         addGame(name: $name, author: $author, image: $image, description: $description, genreId: $genreId){
@@ -75,15 +76,15 @@ export default class AddGame extends Component{
         console.log({name: fieldName, author: fieldAuthor, image: fieldImage, description: fieldDescription, genreId: fieldGenre});
     }
     state = {}
-  
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-    enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
     enviaraGames = () => this.props.history.push({ pathname: '/games' });
+
+    enviaraGenres = () => this.props.history.push({ pathname: '/genres' });
+
     render() {
         const { activeItem } = this.state
         return (
-            <header style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${"https://ak.picdn.net/shutterstock/videos/1035635633/thumb/12.jpg?ip=x480"})`}}>
+            <header style={{flex:'1', position:'absolute', minHeight:'100%', minWidth:'1024px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', width:'100%', height:'auto', backgroundImage: `url(${"https://ak.picdn.net/shutterstock/videos/1035635633/thumb/12.jpg?ip=x480"})`}}>
                 <Fragment>
                     <div>
                     <Fragment>
@@ -102,9 +103,9 @@ export default class AddGame extends Component{
               onClick={this.enviaraGames}><h5 style={{fontSize:'17px'}}>Juegos</h5></Menu.Item>
     
             <Menu.Item
-              name='Descargar'
-              active={activeItem === 'descargar'}
-              onClick={this.handleItemClick}><h5 style={{fontSize:'17px'}}>Descargar</h5></Menu.Item>
+              name='Explorar Géneros'
+              active={activeItem === 'Explorar Géneros'}
+              onClick={this.enviaraGenres}><h5 style={{fontSize:'17px'}}>Explorar por Género</h5></Menu.Item>
           </Menu>
             </div>
             
@@ -116,32 +117,30 @@ export default class AddGame extends Component{
         <Container style={{fontSize:'20px', border:'2px solid black', padding:'20px 20px', backgroundColor:'#6EC3FF'}}>
                         <Form>
                     <FormGroup widths='equal' style={{fontSize:'20px', display:'inline'}}>
+                    <div class="three fields">
                         <FormInput style={{padding:'10px 10px'}} label='Nombre juego' placeholder='Nombre juego' onChange={this.handleName}/>
                         <FormInput style={{padding:'10px 10px'}} label='Nombre autor' placeholder='Nombre autor' onChange={this.handleAuthor}/>
                         <FormInput style={{padding:'10px 10px'}} label='Link imagen' placeholder='Link imagen' onChange={this.handleImage}/>
-                        <FormInput style={{padding:'10px 10px'}} label='Descripción juego' placeholder='Descripción juego' onChange={this.handleDescription}/>
-                        <FormSelect options={this.state.genreList} label='Género' placeholder='Género' onChange={this.handleGenre}/>
+                    </div>
+                        <Form.TextArea rows="2" style={{height:'50px', padding:'10px 10px'}} label='Descripción juego' placeholder='Descripción juego' onChange={this.handleDescription}/>
+                        <br></br>
+                        <div class="three fields">
+                            <FormSelect options={this.state.genreList} label='Género' placeholder='Género' onChange={this.handleGenre}/>
+                        </div>
                     </FormGroup>
-                    <div><Button content='Subir' onClick={this.saveGame} style={{padding:'12px 18px', fontSize:'18px'}}/></div>
-                    
+                    <div><Button content='Subir' onClick={this.saveGame} style={{padding:'24px 36px', fontSize:'18px'}}/></div>        
                 </Form>
         </Container>
                     </div>
                     
                 </Fragment>
                 <div>
-            <Container>
-            <p style={{margin:'180px 0px'}}>
-
-              {/* <div style={{paddingTop:'10px', paddingLeft:'270px', paddingRight:'270px'}}><Button><h4>Comenzar</h4></Button></div> */}
-            </p>
-          </Container>    
+               
             </div>
             
 
           <footer style={{textAlign:'center', color:'white'}}>Derechos reservados 2020</footer>
             </header>
-            
         );
     }
 }
