@@ -94,7 +94,7 @@ export default class GenreList extends Component{
                     <Fragment>
                         {/* Titulo */}
                     <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-                    <div style={{textAlign:'center', padding:'0px 760px', float:'left'}}>
+                    <div style={{textAlign:'center', padding:'0px 570px', float:'left'}}>
                         <a href='Home.jsx'><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{margin:'0px 20px', width:'65px', height:'75px'}}/></a>
                     <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
                      <h1 style={{ float:'left', margin:'0px 0px', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   

@@ -159,7 +159,7 @@ export default class AddGame extends Component{
                     <Fragment>
                     {/* Titulo */}
                     <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-                    <div style={{textAlign:'center', padding:'0px 760px', float:'left'}}>
+                    <div style={{textAlign:'center', padding:'0px 570px', float:'left'}}>
                         <a href='Home.jsx'><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{margin:'0px 20px', width:'65px', height:'75px'}}/></a>
                     <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
                      <h1 style={{ float:'left', margin:'0px 0px', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
@@ -192,14 +192,14 @@ export default class AddGame extends Component{
                         <FormInput style={{padding:'10px 10px'}} label='Nombre autor' placeholder='Nombre autor' onChange={this.handleAuthor}/>
                     </div>
                     <div class="two fields">
-                        <div style={{padding:'10px 10px'}}>
+                        <div style={{padding:'10px 19px'}}>
                             <input type="file" ref={this.el} onChange={handleChange} />
                             <br />
                             <div style={{ width: progress }}>{progress}</div>
                             <br />
                             <Button size="medium" inverted onClick={uploadFile}>Subir Archivo</Button>
                         </div>
-                        <div style={{padding:'10px 10px'}}>
+                        <div style={{padding:'10px 20px'}}>
                             <input type="file" ref={this.el2} onChange={handleChangeImage} />
                             <br />
                             <div style={{ width: progressI }}>{progressI}</div>
@@ -211,11 +211,11 @@ export default class AddGame extends Component{
                     <br />
                         <Form.TextArea rows="2" style={{height:'50px', padding:'10px 10px'}} label='Descripción juego' placeholder='Descripción juego' onChange={this.handleDescription}/>
                         <br></br>
-                        <div class="two fields">
+                        <div style={{padding:'0px 15px'}} class="two fields">
                             <FormSelect options={this.state.genreList} label='Género' placeholder='Género' onChange={this.handleGenre}/>
                         </div>
                     </FormGroup>
-                    <div><Button content='Subir Juego' onClick={this.saveGame} style={{padding:'24px 36px', fontSize:'18px'}}/></div>        
+                    <div><Button color='teal' content='Subir Juego' onClick={this.saveGame} style={{padding:'24px 36px', fontSize:'18px'}}/></div>        
                 </Form>
         </Container>
                     </div>
