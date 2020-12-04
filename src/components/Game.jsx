@@ -10,6 +10,7 @@ const GET_GAME_BY_ID = gql`
             author
             image
             description
+            fileP
             Genre{
                 name
             }
@@ -25,6 +26,7 @@ export default class Game extends Component{
         author: '',
         image: '',
         description: '',
+        fileP: '',
         Genre: ''
     }
 
@@ -38,8 +40,8 @@ export default class Game extends Component{
                 id: this.props.history.location.state.gameId
             }
         });
-        const {id, name, author, image, description, Genre} = response.data.game;
-        this.setState({id: id, name: name, author: author, image: image, description: description, Genre: Genre.name});
+        const {id, name, author, image, description, Genre, fileP} = response.data.game;
+        this.setState({id: id, name: name, author: author, image: image, description: description, fileP: fileP, Genre: Genre.name});
           
         console.log(response.data.game);
 
@@ -50,31 +52,33 @@ export default class Game extends Component{
 
     enviaraAddGame = () => this.props.history.push({ pathname: '/addgame' });
     enviaraGames = () => this.props.history.push({ pathname: '/games' });
+    enviaraGenres = () => this.props.history.push({ pathname: '/genres' });
     render() {
         const { activeItem } = this.state
         const {name, author, description, Genre} = this.state;
         return (
-            <header style={{flex:'1', position:'absolute', minHeight:'100%', minWidth:'1024px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', width:'100%', height:'auto', backgroundImage: `url(${"https://ak.picdn.net/shutterstock/videos/1035635633/thumb/12.jpg?ip=x480"})`}}>
+            <header style={{flex:'1', position:'absolute', minHeight:'100%', minWidth:'1024px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', width:'100%', height:'auto', backgroundImage: `url(${"https://image.freepik.com/vector-gratis/direccion-flecha-luz-neon-perspectiva_1017-22033.jpg"})`}}>
             <Fragment>
                 <Fragment>
+                    {/* Titulo */}
                     <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-
-                    <div >
+                    <div style={{textAlign:'center', padding:'0px 760px', float:'left'}}>
+                        <a href='Home.jsx'><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{margin:'0px 20px', width:'65px', height:'75px'}}/></a>
                     <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
-                     <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
+                     <h1 style={{ float:'left', margin:'0px 0px', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
                     </a>
-                        </div>
-                    
+                    </div>
+            {/* Barra de navegación */}
           <Menu widths= "9">
             <Menu.Item
               name='Juegos'
               active={activeItem === 'juegos'}
               onClick={this.enviaraGames}><h5 style={{fontSize:'17px'}}>Juegos</h5></Menu.Item>
-    
-            <Menu.Item
-              name='Descargar'
-              active={activeItem === 'descargar'}
-              onClick={this.handleItemClick}><h5 style={{fontSize:'17px'}}>Descargar</h5></Menu.Item>
+              
+              <Menu.Item
+              name='Explorar Géneros'
+              active={activeItem === 'Explorar Géneros'}
+              onClick={this.enviaraGenres}><h5 style={{fontSize:'17px'}}>Explorar por Género</h5></Menu.Item>
     
             <Menu.Item
               name='Subir juego'
@@ -82,7 +86,8 @@ export default class Game extends Component{
               onClick={this.enviaraAddGame}><h5 style={{fontSize:'17px'}}>Subir Juego</h5></Menu.Item>
           </Menu>
             </div>
-            
+        
+        {/* Cuadro de información del juego */}
         </Fragment>
                   <br></br>
                   <Divider horizontal>
@@ -94,7 +99,7 @@ export default class Game extends Component{
                 <Table definition>
                     <TableBody>
                         <TableRow>
-                            <TableCell><Image centered src={this.state.image} style={{width:'400px'}} />
+                            <TableCell><Image centered src={`http://localhost:5000${this.state.image}`} style={{width:'400px'}} />
                             <TableRow>
                             <TableCell width={2}><h3>Nombre</h3></TableCell>
                             <TableCell>{name}</TableCell>
@@ -116,7 +121,7 @@ export default class Game extends Component{
                     </TableBody>
                 </Table>
                 <div style={{padding:'0px 946px'}}>
-                 <Button size='massive' color='teal'>Descargar</Button>   
+                 <Button size='massive' color='teal' onClick={()=>window.location.href=`http://localhost:5000${this.state.fileP}`}>Descargar</Button>   
                 </div>
                 
                 </Container>

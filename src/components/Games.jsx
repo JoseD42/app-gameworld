@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Button, Container, List, ListContent, Grid, Menu} from 'semantic-ui-react';
+import {Container, List, ListContent, Menu} from 'semantic-ui-react';
 import {getApolloContext, gql} from '@apollo/client';
 
 const GET_ALL_GAMES = gql`
@@ -10,6 +10,7 @@ const GET_ALL_GAMES = gql`
             author
             image
             description
+            fileP
             Genre{
                 name
             }
@@ -27,7 +28,6 @@ export default class Games extends Component{
 
     state = {
         games: [],
-        gamesOptions: [],
     }
 
     static contextType = getApolloContext(); 
@@ -46,14 +46,14 @@ export default class Games extends Component{
                 <List.Item style={{padding:'60px 10px'}}>
                     <ListContent style={{height:'200px'}} onClick={() => this.inspectGame(game.id)}>
                         <div class="ui link cards">
-                        <div style={{backgroundColor: 'lightyellow'}} class="card">
+                        <div style={{backgroundColor: 'lightred'}} class="card">
                         <div class= "content">
                             <div class="header">
                                 {game.name}
                             </div>
                         </div>
                             <div className="image">
-                                <img style={{height:'180px'}} src={game.image}/>
+                                <img style={{height:'180px'}} src={`http://localhost:5000${game.image}`} />
                             </div>
                             <div class= "content">
                                 <div class="right floated">
@@ -77,17 +77,18 @@ export default class Games extends Component{
         
         const { activeItem } = this.state
         return (
-            <div style={{ backgroundColor: 'lightgrey'}}>
+            <header style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://ak.picdn.net/shutterstock/videos/25360745/thumb/1.jpg"})`}}>
                 <Fragment>
                 <Fragment>
+                    {/* Titulo */}
                     <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-
-                    <div >
+                    <div style={{textAlign:'center', padding:'0px 760px', float:'left'}}>
+                        <a href='Home.jsx'><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{margin:'0px 20px', width:'65px', height:'75px'}}/></a>
                     <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
-                     <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
+                     <h1 style={{ float:'left', margin:'0px 0px', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
                     </a>
-                        </div>
-                    
+                    </div>
+            {/* Barra de navegación */}
           <Menu widths= "9">
             <Menu.Item
               name='Explorar Géneros'
@@ -100,6 +101,7 @@ export default class Games extends Component{
               onClick={this.enviaraAddGame}><h5 style={{fontSize:'17px'}}>Subir Juego</h5></Menu.Item>
           </Menu>
             </div>
+            {/* Carta de juego */}
         </Fragment>
                         <br></br>    
                 <Container>
@@ -108,24 +110,14 @@ export default class Games extends Component{
                     </div>
                 </Container>
             </Fragment>
-            </div>
+            <Container>
+            <p style={{margin:'200px 0px'}}>
+
+              {/* <div style={{paddingTop:'10px', paddingLeft:'270px', paddingRight:'270px'}}><Button><h4>Comenzar</h4></Button></div> */}
+            </p>
+          </Container> 
+            <footer style={{textAlign:'center', color:'white'}}>Derechos reservados 2020</footer>
+            </header>
         );
     }
 }
-
-/*<div  className="ui link cards">
-<div style={{ backgroundColor: 'lightyellow'}} className="card">
-<div className="image">
-<img src={game.image}/>
-</div>
-<div className="content"> 
-<div style={{textAlign: 'center'}}><h2>{game.name}</h2></div>
-<br></br>
-    <div><h4>Género: {game.Genre.name}</h4></div>
-    <br></br>
-<div style={{textAlign: 'justify'}}>
-    {game.description}
-</div>
-</div>
-</div>
-</div>*/

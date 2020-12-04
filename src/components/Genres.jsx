@@ -37,9 +37,7 @@ export default class GenreList extends Component{
     }
 
     handleGenre = (e, {value}) => {
-        //console.log(value);
         const genre = this.state.genres.find(genre => genre.id === value);
-        //console.log(group.products);
         this.setState({games: genre.games});
         console.log(this.state.games);
     }
@@ -64,14 +62,14 @@ export default class GenreList extends Component{
                 <List.Item style={{padding:'60px 10px'}}>
                     <ListContent style={{height:'200px'}} onClick={() => this.inspectGame(p.id)}>
                         <div class="ui link cards">
-                        <div style={{backgroundColor: 'lightyellow'}} class="card">
+                        <div style={{backgroundColor: 'lightred'}} class="card">
                         <div class= "content">
                             <div class="header">
                                 {p.name}
                             </div>
                         </div>
                             <div className="image">
-                                <img style={{height:'180px'}} src={p.image}/>
+                                <img style={{height:'180px'}} src={`http://localhost:5000${p.image}`}/>
                             </div>
                             <div class= "content">
                                 <div class="left floated">
@@ -91,16 +89,18 @@ export default class GenreList extends Component{
     render() {
         const { activeItem } = this.state
         return (
+            <header style={{flex:'1', position:'absolute', minHeight:'100%', minWidth:'1024px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', width:'100%', height:'auto', backgroundImage: `url(${"https://www.xtrafondos.com/wallpapers/luces-neon-en-tunel-4261.jpg"})`}}>
             <Fragment>
-                                <Fragment>
+                    <Fragment>
+                        {/* Titulo */}
                     <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-
-                    <div >
+                    <div style={{textAlign:'center', padding:'0px 760px', float:'left'}}>
+                        <a href='Home.jsx'><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{margin:'0px 20px', width:'65px', height:'75px'}}/></a>
                     <a onClick={this.enviaraHome} style={{textAlign:'center', color: 'white', fontSize:'50px', }}>
-                     <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
+                     <h1 style={{ float:'left', margin:'0px 0px', color: 'white', fontSize:'50px'}}><a href='Home.jsx' style={{color:'white'}}>GameWorld</a></h1>   
                     </a>
-                        </div>
-                    
+                    </div>
+            {/* Barra de navegación */}
           <Menu widths= "9">
             <Menu.Item
               name='Juegos'
@@ -126,6 +126,7 @@ export default class GenreList extends Component{
                     </div>
                 </Container>
             </Fragment>
+            </header>
         );
     }
 }

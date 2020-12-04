@@ -2,22 +2,6 @@ import React, { Component, Fragment } from 'react'
 import {getApolloContext, gql} from '@apollo/client';
 import {Button, Container, Grid, Header, Icon, Image, Input, Item, Label, Menu, Segment, Step, Table, Divider, Modal, Rating, Popup, Card, List} from 'semantic-ui-react'
 
-const GET_ALL_GAMES = gql`
-{ 
-games
-    {
-        id
-        name
-        author
-        image
-        description
-        Genre
-        {
-            name
-        }
-    }
-}`;
-
 export default class MenuExampleBasic extends Component {
     state = {}
   
@@ -36,11 +20,15 @@ export default class MenuExampleBasic extends Component {
       return(
         <header style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${"https://cdn-3.expansion.mx/dims4/default/a8d9bb5/2147483647/strip/true/crop/724x483+0+0/resize/1800x1201!/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F94%2F91%2Ffd67f78e4362965da5403223727c%2Fvideojuegos-emprendedores-gamers.jpg"})`}}>
          <Fragment>
+           
+           {/* Titulo */}
             <div style={{backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage:`url(${"https://image.freepik.com/vector-gratis/fondo-minimalista-abstracto-moderno-rojo-azul_155717-44.jpg"})`}}>
-              
-              
-                  <h1 style={{textAlign:'center', color: 'white', fontSize:'50px'}}><img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{width:'150px', height:'150px', float:'left', padding:'0px 80px'}}/>GameWorld</h1>
-                  
+              <div style={{textAlign:'center', padding:'0px 760px', float:'left'}}>
+                <img src="https://www.informaticanosolopc.com/wp-content/uploads/MANDO-BLANCO-PNG-01.png" style={{margin:'0px 20px', width:'65px', height:'75px'}}/>
+                  <h1 style={{ float:'left', margin:'0px 0px', color: 'white', fontSize:'50px'}}>GameWorld</h1>
+              </div>
+            
+          {/* Barra de navegación */}
           <Menu widths= "9">
             <Menu.Item
               name='Juegos'
@@ -59,8 +47,10 @@ export default class MenuExampleBasic extends Component {
           </Menu>
             </div>
         </Fragment>
+
+        {/* Descripción */}
         <div>
-        <div style={{margin:'300px 300px', border:'3px solid white', textAlign:'center'}}>
+        <div style={{backgroundColor: 'rgba(0,0,0,0.5)', margin:'300px 300px', border:'3px solid white', textAlign:'center'}}>
           <Container>
             <p style={{color:'white', font: 'bold', fontSize:'17px', margin:'15px 0px'}}>
               <h1 style={{margin:'10px'}}>¿QUIERES DAR A CONOCER TU PROPIO VIDEOJUEGO?</h1>
